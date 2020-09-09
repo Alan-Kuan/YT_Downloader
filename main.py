@@ -22,7 +22,7 @@
 import sys
 
 from PyQt5.QtWidgets import QDialog, QFileDialog, QApplication, QMessageBox, QLabel
-from PyQt5.QtGui import QImage, QPixmap, QIcon, QMovie
+from PyQt5.QtGui import QImage, QPixmap, QIcon
 from PyQt5.QtCore import pyqtSlot, pyqtSignal, QObject
 from PyQt5.uic import loadUi
 
