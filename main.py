@@ -71,6 +71,7 @@ class AppWindow(QDialog):
         logger = Logger()
         logger.msg_signal.connect(self.onErrorOccur)
         options['logger'] = logger
+        options['progress_hooks'] = [self.progress_hook]
         with YoutubeDL(options) as ydl:
             try:
                 ydl.download([url])
@@ -82,7 +83,6 @@ class AppWindow(QDialog):
         logger.msg_signal.connect(self.onErrorOccur)
         options = {
             'logger': logger,
-            'progress_hooks': [self.progress_hook]
         }
 
         with YoutubeDL(options) as ydl:
