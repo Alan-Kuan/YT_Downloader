@@ -13,7 +13,7 @@ Since, it was for my personal usage, it only provides functionality of downloadi
 * urllib3
 * ffmpeg (for encoding a video into an audio)
 
-## Instation & Usage
+## Installation & Usage
 1. Git clone the repo, download with a zip file, or whatever method you like to pull the files.
 2. Make sure `main.py`, `interface.ui`, and `assets/` are at the same directory.
 3. Execute the `main.py` and enjoy it!
