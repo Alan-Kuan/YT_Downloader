@@ -4,7 +4,7 @@
 #      YT Downloader - A simple GUI for Python package, youtube-dl.
 #      Copyright (C) 2019, 2020 Alan Kuan
 #
-#	   This file is a part of YT Downloader.
+#	     This file is a part of YT Downloader.
 #  
 #      YT Downloader is free software: you can redistribute it and/or modify
 #      it under the terms of the GNU General Public License as published by
