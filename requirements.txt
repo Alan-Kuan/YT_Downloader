@@ -1,0 +1,3 @@
+PyQt5
+youtube-dl
+urllib3
