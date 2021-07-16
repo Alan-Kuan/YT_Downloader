@@ -55,11 +55,11 @@ class AppWindow(QDialog):
 
     def clearContents(self):
         self.thumbnail.clear()
-        self.title.setText("影片名稱： ")
-        self.duration.setText("影片長度： ")
-        self.uploader.setText("上傳者： ")
-        self.upload_date.setText("上傳日期： ")
-        self.description.setPlainText("")
+        self.title.setText('')
+        self.duration.setText('')
+        self.uploader.setText('')
+        self.upload_date.setText('')
+        self.description.setPlainText('')
 
     def download_vid(self, url, options):
         logger = Logger()
@@ -76,32 +76,31 @@ class AppWindow(QDialog):
         logger = Logger()
         logger.msg_signal.connect(self.onErrorOccur)
         options = {
-            'logger': logger,
+            'logger': logger
         }
-
         with YoutubeDL(options) as ydl:
             try:
                 self.clearContents()
                 info = ydl.extract_info(url, download = False)
-
-                self.title.setText("影片名稱： " + info['title'])
-
+                # video title
+                self.title.setText(info['title'])
+                # video duration
                 duration = info['duration']
                 formatted_duration = []
                 for i in range(3):
                     item = duration % 60
                     formatted_duration.append(f'{item:02d}')
                     duration //= 60
-                self.duration.setText("影片長度： " + formatted_duration[2] + ":" + formatted_duration[1] + ":" + formatted_duration[0])
-
-                self.uploader.setText("上傳者： " + info['uploader'])
-
+                self.duration.setText(':'.join(formatted_duration[::-1]))
+                # video uploader
+                self.uploader.setText(info['uploader'])
+                # video upload date
                 date = info['upload_date']
-                formatted_date = date[0:4] + "/" + date[4:6] + "/" + date[6:8]
-                self.upload_date.setText("上傳日期： " + formatted_date)
-
+                formatted_date = f'{ date[0:4] }/{ date[4:6] }/{ date[6:8] }'
+                self.upload_date.setText(formatted_date)
+                # video description
                 self.description.setPlainText(info['description'])
-
+                # video thumbnail
                 img = QImage()
                 data = urllib.request.urlopen(info['thumbnail']).read()
                 img.loadFromData(data)
@@ -119,7 +118,7 @@ class AppWindow(QDialog):
 
     @pyqtSlot()
     def onSelectPath(self):
-        path = str(QFileDialog.getExistingDirectory(self, "Select Directory"))
+        path = QFileDialog.getExistingDirectory(self, 'Select Directory')
         self.selected_path.setText(path)
 
     @pyqtSlot(str)
