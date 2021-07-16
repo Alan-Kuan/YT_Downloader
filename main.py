@@ -111,8 +111,8 @@ class AppWindow(QDialog):
     @pyqtSlot(dict)
     def progress_hook(self, d):
         if d['status'] == 'downloading':
-            val = d['_percent_str'][:-1]
-            self.progress_bar.setValue(float(val))
+            val = float(d['_percent_str'][:-1])
+            self.progress_bar.setValue(int(val))
         elif d['status'] == 'finished':
             self.progress_bar.setValue(100)
 
