@@ -88,7 +88,7 @@
         <cursorShape>IBeamCursor</cursorShape>
        </property>
        <property name="text">
-        <string>影片名稱</string>
+        <string>影片名稱：</string>
        </property>
        <property name="textFormat">
         <enum>Qt::AutoText</enum>
@@ -122,7 +122,7 @@
         <cursorShape>IBeamCursor</cursorShape>
        </property>
        <property name="text">
-        <string>影片長度</string>
+        <string>影片長度：</string>
        </property>
        <property name="textFormat">
         <enum>Qt::AutoText</enum>
@@ -156,7 +156,7 @@
         <cursorShape>IBeamCursor</cursorShape>
        </property>
        <property name="text">
-        <string>上傳者</string>
+        <string>上傳者：</string>
        </property>
        <property name="textFormat">
         <enum>Qt::AutoText</enum>
@@ -190,7 +190,7 @@
         <cursorShape>IBeamCursor</cursorShape>
        </property>
        <property name="text">
-        <string>上傳日期</string>
+        <string>上傳日期：</string>
        </property>
        <property name="textFormat">
         <enum>Qt::PlainText</enum>
@@ -248,7 +248,7 @@
             </font>
            </property>
            <property name="text">
-            <string>下載格式</string>
+            <string>下載格式：</string>
            </property>
            <property name="textInteractionFlags">
             <set>Qt::NoTextInteraction</set>
@@ -338,7 +338,7 @@
            </property>
            <property name="maximumSize">
             <size>
-             <width>16777215</width>
+             <width>80</width>
              <height>30</height>
             </size>
            </property>
@@ -349,7 +349,7 @@
             </font>
            </property>
            <property name="text">
-            <string>下載位置</string>
+            <string>下載位置：</string>
            </property>
            <property name="textInteractionFlags">
             <set>Qt::NoTextInteraction</set>
@@ -391,6 +391,45 @@
            </property>
            <property name="text">
             <string>...</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <property name="leftMargin">
+          <number>20</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>80</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>檔案名稱：</string>
+           </property>
+           <property name="textInteractionFlags">
+            <set>Qt::NoTextInteraction</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="saved_filename">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
            </property>
           </widget>
          </item>
@@ -439,19 +478,6 @@
         </layout>
        </item>
       </layout>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_7">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>
@@ -550,7 +576,7 @@
       </font>
      </property>
      <property name="text">
-      <string>影片詳細資訊</string>
+      <string>影片詳細資訊：</string>
      </property>
      <property name="textInteractionFlags">
       <set>Qt::NoTextInteraction</set>

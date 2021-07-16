@@ -20,17 +20,15 @@
 #      along with YT Downloader.  If not, see <https://www.gnu.org/licenses/>.
 
 import sys
+import urllib
+import re
+
+from youtube_dl import YoutubeDL
 
 from PyQt5.QtWidgets import QDialog, QFileDialog, QApplication, QMessageBox, QLabel
 from PyQt5.QtGui import QImage, QPixmap, QIcon
 from PyQt5.QtCore import pyqtSlot, pyqtSignal, QObject
 from PyQt5.uic import loadUi
-
-from youtube_dl import YoutubeDL
-
-import urllib
-
-import re
 
 class Logger(QObject):
     msg_signal = pyqtSignal(str)
@@ -44,29 +42,25 @@ class Logger(QObject):
         self.msg_signal.emit(msg)
 
 class AppWindow(QDialog):
-
     def __init__(self):
         super(AppWindow, self).__init__()
-
         # load interface
         loadUi('interface.ui', self)
-
         # hide progress bar
         self.progress_bar.setHidden(True)
-
         # initialize buttons
         self.select_path_btn.clicked.connect(self.onSelectPath)
         self.confirm_btn.clicked.connect(self.onConfirm)
         self.download_btn.clicked.connect(self.onDownload)
-        
+
     def clearContents(self):
         self.thumbnail.clear()
-        self.title.setText("影片名稱")
-        self.duration.setText("影片長度")
-        self.uploader.setText("上傳者")
-        self.upload_date.setText("上傳日期")
+        self.title.setText("影片名稱： ")
+        self.duration.setText("影片長度： ")
+        self.uploader.setText("上傳者： ")
+        self.upload_date.setText("上傳日期： ")
         self.description.setPlainText("")
-        
+
     def download_vid(self, url, options):
         logger = Logger()
         logger.msg_signal.connect(self.onErrorOccur)
@@ -88,27 +82,26 @@ class AppWindow(QDialog):
         with YoutubeDL(options) as ydl:
             try:
                 self.clearContents()
-
                 info = ydl.extract_info(url, download = False)
 
-                self.title.setText("影片名稱：" + info['title'])
+                self.title.setText("影片名稱： " + info['title'])
 
                 duration = info['duration']
                 formatted_duration = []
                 for i in range(3):
                     item = duration % 60
-                    formatted_duration.append("{:02d}".format(item))
+                    formatted_duration.append(f'{item:02d}')
                     duration //= 60
-                self.duration.setText("影片長度: " + formatted_duration[2] + ":" + formatted_duration[1] + ":" + formatted_duration[0])
-                
-                self.uploader.setText("上傳者: " + info['uploader'])
-                
+                self.duration.setText("影片長度： " + formatted_duration[2] + ":" + formatted_duration[1] + ":" + formatted_duration[0])
+
+                self.uploader.setText("上傳者： " + info['uploader'])
+
                 date = info['upload_date']
                 formatted_date = date[0:4] + "/" + date[4:6] + "/" + date[6:8]
-                self.upload_date.setText("上傳日期: " + formatted_date)
-                
+                self.upload_date.setText("上傳日期： " + formatted_date)
+
                 self.description.setPlainText(info['description'])
-                
+
                 img = QImage()
                 data = urllib.request.urlopen(info['thumbnail']).read()
                 img.loadFromData(data)
@@ -128,23 +121,31 @@ class AppWindow(QDialog):
     def onSelectPath(self):
         path = str(QFileDialog.getExistingDirectory(self, "Select Directory"))
         self.selected_path.setText(path)
-    
+
     @pyqtSlot(str)
     def onErrorOccur(self, msg):
-        # The following line is the best answer from https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python
+        # The following line is the best answer from
+        # https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python
         ansi_esc = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
         QMessageBox.about(self, "Error", ansi_esc.sub('', msg))
- 
+
     @pyqtSlot()
     def onConfirm(self):
         url = self.URL_input.text()
         self.extract_info(url)
-            
+
     @pyqtSlot()
     def onDownload(self):
         url = self.URL_input.text()
         vid_format = self.format.currentText()
-        path = self.selected_path.text() + '/%(title)s.%(ext)s'
+        filename = self.saved_filename.text()
+        if filename == '':
+            # default filename is its title on YouTube
+            filename = '%(title)s.%(ext)s'
+        else:
+            # append file extension to filename
+            filename += f'.{ vid_format }'
+        path = f'{ self.selected_path.text() }/{ filename }'
         if vid_format == "mp3":
             options = {
                 'format': 'bestaudio/best',
