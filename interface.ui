@@ -94,7 +94,7 @@
         <enum>Qt::AutoText</enum>
        </property>
        <property name="textInteractionFlags">
-        <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+        <set>Qt::NoTextInteraction</set>
        </property>
       </widget>
      </item>
@@ -128,7 +128,7 @@
         <enum>Qt::AutoText</enum>
        </property>
        <property name="textInteractionFlags">
-        <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+        <set>Qt::NoTextInteraction</set>
        </property>
       </widget>
      </item>
@@ -162,7 +162,7 @@
         <enum>Qt::AutoText</enum>
        </property>
        <property name="textInteractionFlags">
-        <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+        <set>Qt::NoTextInteraction</set>
        </property>
       </widget>
      </item>
@@ -196,7 +196,7 @@
         <enum>Qt::PlainText</enum>
        </property>
        <property name="textInteractionFlags">
-        <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+        <set>Qt::NoTextInteraction</set>
        </property>
       </widget>
      </item>
@@ -206,6 +206,9 @@
     <widget class="QLabel" name="label">
      <property name="text">
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'微軟正黑體'; font-size:48pt; color:#00aaff;&quot;&gt;YT &lt;/span&gt;&lt;span style=&quot; font-family:'微軟正黑體'; font-size:48pt; color:#00cccc;&quot;&gt;Downloader&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::NoTextInteraction</set>
      </property>
     </widget>
    </item>
@@ -248,7 +251,7 @@
             <string>下載格式</string>
            </property>
            <property name="textInteractionFlags">
-            <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+            <set>Qt::NoTextInteraction</set>
            </property>
           </widget>
          </item>
@@ -349,7 +352,7 @@
             <string>下載位置</string>
            </property>
            <property name="textInteractionFlags">
-            <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+            <set>Qt::NoTextInteraction</set>
            </property>
           </widget>
          </item>
@@ -372,6 +375,9 @@
              <family>微軟正黑體</family>
              <pointsize>12</pointsize>
             </font>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -547,7 +553,7 @@
       <string>影片詳細資訊</string>
      </property>
      <property name="textInteractionFlags">
-      <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+      <set>Qt::NoTextInteraction</set>
      </property>
     </widget>
    </item>
